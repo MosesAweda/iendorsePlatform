@@ -6,14 +6,9 @@ import instagram from './svg/instagram.svg';
 const SignIn = () => {
   return (
     <>
-      <div
-        className="min-h-screen flex flex-col bg-cover bg-center r overflow-hidden"
-        style={{
-          backgroundImage: 'url(images/formbanner.png)',
-        }}
-      >
-        <div className="flex items-center justify-start w-full px-3 py-4  mx-10 px-20">
-          <div className="w-full max-w-md bg-white rounded-lg shadow dark:border p-6 space-y-4 md:space-y-6">
+
+      <div className="min-h-screen flex items-center justify-start bg-cover bg-center overflow-hidden" style={{ backgroundImage: 'url(images/formbanner.png)' }}>
+      <div className="w-full max-w-md bg-white rounded-lg shadow dark:border p-6 space-y-4 md:space-y-6 mx-5 md:mx-10 md:my-10">
             <div className="flex justify-center">
               <img src={logo} alt="Logo" />
             </div>
@@ -73,7 +68,7 @@ const SignIn = () => {
             </div>
           </div>
         </div>
-      </div>
+      
     </>
   );
 };
