@@ -10,6 +10,7 @@ import ResetPassword from './components/ResetPasssword';
 import NewPasword from './components/NewPassword';
 import { Verify } from 'crypto';
 import VerifyEmail from './components/VerifyEmail';
+import SingleCampaign from './components/SingleCampaign';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
      <Routes>
    
         <Route path='/' element={<Home />} />
+        <Route path='/SingleCampaign' element={<SingleCampaign />} />
         <Route path='/NewPassword' element={<NewPasword />} />
         <Route path='/VerifyEmail' element={<VerifyEmail />} />
         <Route path='/ForgotPassword' element={<ForgotPassword />} />

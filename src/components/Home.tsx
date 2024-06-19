@@ -36,12 +36,16 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 h-full gap-4 p-4">
           <div className="flex justify-center items-center p-4">
             <div className="mx-5 max-w-md">
-              <div className="text-2xl font-medium mb-4">Discover, Endorse, Transform</div>
+            <div style={{ fontFamily: "Georgia" }} className="text-4xl font-bold mb-4">
+          Discover, Endorse, Transform
+        </div>
+
               <p className="text-sm md:text-base leading-relaxed">
                 Dive into our platform to discover a world of impactful campaigns, each one a beacon of hope, a catalyst for transformation.
                 With iEndorse, you have the power to endorse causes close to your heart, amplifying their reach and influence.
                 Every endorsement is a vote for change, a commitment to shaping a better tomorrow for all.
               </p>
+              <button className='p-3 bg-customBlue text-white rounded-md px-14 mt-8'> Create Campaign</button>
             </div>
           </div>
         </div>
@@ -59,12 +63,12 @@ const Home = () => {
       backgroundPosition: 'center',
       overflow: 'visible',
   }}>Civic Engagements</button></div>
-  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Civic Engagements</button></div>
-  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Civ</button></div>
-  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Civ</button></div>
-  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Civ</button></div>
-  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Civ</button></div>
-  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Civ</button></div>
+  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Social Causes</button></div>
+  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Education</button></div>
+  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Art</button></div>
+  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Technology</button></div>
+  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Business</button></div>
+  <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Others</button></div>
 </div>
 
 
