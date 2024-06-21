@@ -11,15 +11,21 @@ import NewPasword from './components/NewPassword';
 import { Verify } from 'crypto';
 import VerifyEmail from './components/VerifyEmail';
 import SingleCampaign from './components/SingleCampaign';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Notifications from './components/Notifications';
 
 function App() {
   return (
     <>
      <Router>
+     <ToastContainer />
      <Routes>
    
+
         <Route path='/' element={<Home />} />
         <Route path='/SingleCampaign' element={<SingleCampaign />} />
+        <Route path='/Notifications' element={<Notifications />} />
         <Route path='/NewPassword' element={<NewPasword />} />
         <Route path='/VerifyEmail' element={<VerifyEmail />} />
         <Route path='/ForgotPassword' element={<ForgotPassword />} />
