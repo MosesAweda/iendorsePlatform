@@ -2,11 +2,20 @@ import React, { useState, useRef, ChangeEvent, KeyboardEvent, FormEvent } from '
 import logo from './svg/logo.svg';
 import facebook from './svg/facebook.svg';
 import instagram from './svg/instagram.svg';
+import { baseURL } from './URL';
+import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
+import { Audio, LineWave } from 'react-loader-spinner';
 
 const VerifyEmail: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(['', '', '', '']);
   const [resendClicked, setResendClicked] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const navigate = useNavigate();
+  const token = window.localStorage.getItem("token");
+
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
@@ -22,6 +31,8 @@ const VerifyEmail: React.FC = () => {
     }
   };
 
+
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === 'Backspace' && otp[index] === '') {
       if (index > 0) {
@@ -30,12 +41,43 @@ const VerifyEmail: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit =  async  (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const otpCode = otp.join('');
     console.log('OTP submitted:', otpCode);
-    // Add your form submission logic here
+   
+    const apiUrl = `${baseURL}/Account/VerifyToken`;
+    setLoading(true);
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+         token : otpCode
+        }),
+      });
+  
+      const data = await response.json();
+      
+      if (response.ok && data.succeeded) {
+        // window.localStorage.setItem("email", data.data.emailAddress);
+        // window.localStorage.setItem("token", data.data.jwtToken);
+        navigate('/SignIn');
+        toast.success('Email verified successfully, Log in to your account');
+      } else {
+        toast.error(data.message || 'An error occurred while verifying email');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('An error occurred while verifying email');
+    } finally {
+      setLoading(false);
+    }
   };
+    
+ 
 
   const handleResend = () => {
     setResendClicked(true);
@@ -91,9 +133,23 @@ const VerifyEmail: React.FC = () => {
               </div>
 
               <div className='mb-20'>
-                <button type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full mb-10">
-                  Verify
-                </button>
+              <button type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
+              <span> Verify</span>
+              {loading && (
+                <LineWave
+                  visible={true}
+                  height="40"
+                  width="1000"
+                  color="#fff"
+                  ariaLabel="line-wave-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  firstLineColor=""
+                  middleLineColor=""
+                  lastLineColor=""
+                />
+              )}
+            </button>
               </div>
             </form>
 

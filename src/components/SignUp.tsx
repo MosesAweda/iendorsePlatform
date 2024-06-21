@@ -107,6 +107,8 @@ const SignUp: React.FC = () => {
     e.preventDefault();
   
     const apiUrl = `${baseURL}/Account/CreateAccountForUser`;
+    const tokenUrl = `${baseURL}/Account/SendToken`;
+  
     // Validate all fields before submitting
     const validationErrors: Errors = {
       fullName: validateField('fullName', fullName),
@@ -142,12 +144,31 @@ const SignUp: React.FC = () => {
       });
   
       const data = await response.json();
-      
+  
       if (response.ok && data.succeeded) {
+        // Save email and token to localStorage
         window.localStorage.setItem("email", data.data.emailAddress);
         window.localStorage.setItem("token", data.data.jwtToken);
-        navigate('/VerifyEmail');
-        toast.success('Account created successfully');
+  
+        // Request for the token using the user's email address
+        const tokenResponse = await fetch(tokenUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            emailAddress: data.data.emailAddress,
+          }),
+        });
+  
+        const tokenData = await tokenResponse.json();
+  
+        if (tokenResponse.ok && tokenData.succeeded) {
+          navigate('/VerifyEmail');
+          toast.success('Account created successfully and token sent');
+        } else {
+          toast.error(tokenData.message || 'An error occurred while sending the token');
+        }
       } else {
         toast.error(data.message || 'An error occurred while creating the account');
       }
