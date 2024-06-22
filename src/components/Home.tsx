@@ -10,6 +10,7 @@ import share from './svg/share.svg';
 import endorse from './svg/endorse.svg';
 import Navbar from './Navbar';
 import Campaigns from './Campaigns';
+import { Link } from 'react-router-dom';
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -45,7 +46,7 @@ const Home = () => {
                 With iEndorse, you have the power to endorse causes close to your heart, amplifying their reach and influence.
                 Every endorsement is a vote for change, a commitment to shaping a better tomorrow for all.
               </p>
-              <button className='p-3 bg-customBlue text-white rounded-md px-14 mt-8'> Create Campaign</button>
+              <Link to={'/'} ><button className='p-3 bg-customBlue text-white rounded-md px-14 mt-8'> Create Campaign</button> </Link>
             </div>
           </div>
         </div>
@@ -76,7 +77,7 @@ const Home = () => {
  
 
 <div className=" flex flex-col bg-gray-100 justify-center items-center  ">
-   <Campaigns />
+   <Campaigns  />
 </div>
 
 

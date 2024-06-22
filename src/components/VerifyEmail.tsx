@@ -8,14 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { Audio, LineWave } from 'react-loader-spinner';
 
 const VerifyEmail: React.FC = () => {
-  const [otp, setOtp] = useState<string[]>(['', '', '', '']);
+  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const [resendClicked, setResendClicked] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
-
-
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
@@ -31,8 +29,6 @@ const VerifyEmail: React.FC = () => {
     }
   };
 
-
-
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === 'Backspace' && otp[index] === '') {
       if (index > 0) {
@@ -41,7 +37,7 @@ const VerifyEmail: React.FC = () => {
     }
   };
 
-  const handleSubmit =  async  (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const otpCode = otp.join('');
     console.log('OTP submitted:', otpCode);
@@ -55,15 +51,13 @@ const VerifyEmail: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-         token : otpCode
+          token: otpCode
         }),
       });
   
       const data = await response.json();
       
       if (response.ok && data.succeeded) {
-        // window.localStorage.setItem("email", data.data.emailAddress);
-        // window.localStorage.setItem("token", data.data.jwtToken);
         navigate('/SignIn');
         toast.success('Email verified successfully, Log in to your account');
       } else {
@@ -76,8 +70,6 @@ const VerifyEmail: React.FC = () => {
       setLoading(false);
     }
   };
-    
- 
 
   const handleResend = () => {
     setResendClicked(true);
@@ -94,12 +86,12 @@ const VerifyEmail: React.FC = () => {
         }}
       >
         <div className="min-h-screen flex items-center justify-start bg-cover bg-center overflow-hidden" style={{ backgroundImage: 'url(images/formbanner.png)' }}>
-        <div className="w-full max-w-md bg-white rounded-lg shadow dark:border p-6 space-y-4 md:space-y-6 mx-5 mt-3 md:mx-10 md:my-10">
+          <div className="w-full max-w-md bg-white rounded-lg shadow dark:border p-6 space-y-4 md:space-y-6 mx-5 mt-3 md:mx-10 md:my-10">
             <div className="flex justify-center">
               <img src={logo} alt="Logo" />
             </div>
             <div className="my-1 flex justify-center text-lg font-medium leading-tight tracking-tight text-gray-900 md:text-xl">
-                Email Verification
+              Email Verification
             </div>
             <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900 my-1">
               Please enter the OTP sent to your email address.
@@ -107,10 +99,10 @@ const VerifyEmail: React.FC = () => {
             <form className="space-y-20 md:space-y-20" onSubmit={handleSubmit}>
               <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                 {otp.map((digit, index) => (
-                  <div key={index} className="w-16 h-16">
+                  <div key={index} className="w-12 h-12">
                     <input
                       ref={(el) => (inputRefs.current[index] = el)}
-                      className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                      className="w-full h-full flex flex-col items-center justify-center text-center px-2 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                       type="text"
                       maxLength={1}
                       value={digit}
@@ -133,32 +125,30 @@ const VerifyEmail: React.FC = () => {
               </div>
 
               <div className='mb-20'>
-              <button type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
-              <span> Verify</span>
-              {loading && (
-                <LineWave
-                  visible={true}
-                  height="40"
-                  width="1000"
-                  color="#fff"
-                  ariaLabel="line-wave-loading"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                  firstLineColor=""
-                  middleLineColor=""
-                  lastLineColor=""
-                />
-              )}
-            </button>
+                <button disabled={loading} type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
+                  <span> Verify</span>
+                  {loading && (
+                    <LineWave
+                      visible={true}
+                      height="40"
+                      width="1000"
+                      color="#fff"
+                      ariaLabel="line-wave-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      firstLineColor=""
+                      middleLineColor=""
+                      lastLineColor=""
+                    />
+                  )}
+                </button>
               </div>
             </form>
 
-            <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900 ">
-            You already have an account? Sign In.
+            <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900">
+              You already have an account? Sign In.
             </div>
           </div>
-
-          
         </div>
       </div>
     </>
