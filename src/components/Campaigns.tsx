@@ -11,8 +11,9 @@ const Campaigns = () => {
 
   return (
     <>
-      <Link to={'/SingleCampaign'}>
+     
         <div className="p-4 max-w-md border-gray-700 bg-white rounded-lg my-5">
+          <Link to={"/singlecampaign"}> 
           <div>
             <div className="flex items-center">
               <div className="mr-4 bg-red-500 rounded-full mx-1">
@@ -39,6 +40,8 @@ const Campaigns = () => {
           <div>
             <img src="/images/photo.png" alt="Campaign" />
           </div>
+
+          </Link>
           <div className='flex mt-4 text-sm'>
             <div className='flex mr-5 items-center'>
               <div>
@@ -55,7 +58,7 @@ const Campaigns = () => {
             </div>
           </div>
         </div>
-      </Link>
+      
     </>
   );
 }

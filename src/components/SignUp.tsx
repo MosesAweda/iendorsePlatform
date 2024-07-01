@@ -193,7 +193,7 @@ const SignUp: React.FC = () => {
         <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900 my-1">
           You are just a step closer, let’s get you started.
         </div>
-        <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+        <form className="space-y-4 md:space-y-4" onSubmit={handleSubmit}>
           <div>
             <input
               type="text"
@@ -281,11 +281,11 @@ const SignUp: React.FC = () => {
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <img src={facebook} alt="Facebook" />
-          <img src={instagram} alt="Instagram" />
+          <img src={facebook} alt="Facebook"  width={30} height={30}/>
+          <img src={instagram} alt="Instagram"   width={30} height={30} />
         </div>
         <div className="flex items-center justify-center">
-          <p className="px-4">You already have an account? <a href="/SignIn">Sign in</a></p>
+          <p className="px-4">You already have an account? <a href="/SignIn" className='text-customBlue hover:text-blue-500'>Sign in</a></p>
         </div>
         <div className="flex items-center justify-center">
       

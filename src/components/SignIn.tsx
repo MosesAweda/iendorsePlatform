@@ -47,17 +47,17 @@ const SignIn: React.FC = () => {
   return (
     <>
       <div className="min-h-screen flex items-center justify-start bg-cover bg-center overflow-hidden" style={{ backgroundImage: 'url(images/formbanner.png)' }}>
-        <div className="w-full max-w-md bg-white rounded-lg shadow dark:border p-6 space-y-4 md:space-y-6 mt-5 mx-5 md:mx-10 md:my-10">
+        <div className="w-full max-w-md bg-white rounded-lg shadow dark:border p-6 space-y-4 md:space-y-6 mt-1 mx-5 md:mx-10 md:my-5">
           <div className="flex justify-center">
             <img src={logo} alt="Logo" />
           </div>
-          <div className="my-1 flex justify-center text-lg font-medium leading-tight tracking-tight text-gray-900 md:text-xl">
+          <div className=" flex justify-center text-lg font-medium leading-tight tracking-tight text-gray-900 md:text-xl">
             Sign In
           </div>
-          <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900 my-1">
+          <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900 ">
             Your impact matters, we’re excited to have you back.
           </div>
-          <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-4 md:space-y-3" onSubmit={handleSubmit}>
             <div>
               <input
                 type="email"
@@ -84,7 +84,7 @@ const SignIn: React.FC = () => {
             </div>
             
             <div className="flex items-center justify-center">
-              <p className="px-4">Forgot your password? <a href="/ForgotPassword">Reset</a></p>
+              <p className="px-4">Forgot your password? <a href="/ForgotPassword" className='text-customBlue hover:text-blue-500  font-medium'>Reset</a></p>
             </div>
 
             <div>
@@ -104,11 +104,11 @@ const SignIn: React.FC = () => {
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
           <div className="flex justify-center space-x-4">
-            <img src={facebook} alt="Facebook" />
-            <img src={instagram} alt="Instagram" />
+            <img src={facebook} alt="Facebook"  width={30} height={30}/>
+            <img src={instagram} alt="Instagram" width={30} height={30} />
           </div>
           <div className="flex items-center justify-center">
-            <p className="px-4">Are you new here? <a href="/SignUp">Create An Account</a></p>
+            <p className="px-4">Are you new here? <a href="/SignUp" className='text-customBlue    hover:text-blue-500'>Create An Account</a></p>
           </div>
         </div>
       </div>
