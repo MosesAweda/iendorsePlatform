@@ -50,7 +50,7 @@ const SingleCampaign = () => {
       <Navbar />
 
       <div className="flex flex-col bg-gray-100 justify-center items-center">
-        <div className="p-4 max-w-md border-gray-700 bg-white rounded-lg my-5">
+        <div className="p-4 max-w-md border-gray-700 bg-white rounded-lg my-5 mx-3">
           <div className="my-4">
             <img src="/images/photo.png" alt="Campaign" />
           </div>

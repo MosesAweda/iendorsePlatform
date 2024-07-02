@@ -16,20 +16,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import Notifications from './components/Notifications';
 import Search from './components/Search';
 import CreateCampaign from './components/CreateCampaign.tsx/CreateCampaign';
-import Feed from './components/Feed';
+import Feed from './components/Feeds/Feed';
+import Analytics from './components/Feeds/Analytics';
 
 function App() {
   return (
     <>
+ 
     
      <Router>
      <ToastContainer />
      <Routes>
-   
-
+  
         <Route path='/' element={<Home />} />
         <Route path='Feed' element={<Feed />} />
         <Route path='/SingleCampaign' element={<SingleCampaign />} />
+        <Route path='/Analytics' element={<Analytics />} />
         <Route path='/CreateCampaign' element={<CreateCampaign />} />
         <Route path='/Notifications' element={<Notifications />} />
         <Route path='/NewPassword' element={<NewPasword />} />
@@ -43,7 +45,7 @@ function App() {
  
         </Routes>
     </Router>
- 
+  
     </>
  
   );
