@@ -256,23 +256,23 @@ const SignUp: React.FC = () => {
             {errors.confirmPass && <p className="text-red-600 text-sm">{errors.confirmPass}</p>}
           </div>
           <div>
-            <button disabled={loading} type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
-              <span>Create Account</span>
-              {loading && (
-                <LineWave
-                  visible={true}
-                  height="40"
-                  width="40"
-                  color="#fff"
-                  ariaLabel="line-wave-loading"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                  firstLineColor=""
-                  middleLineColor=""
-                  lastLineColor=""
-                />
-              )}
-            </button>
+              <button disabled={loading} type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
+                <span>Create Account</span>
+                {loading && (
+                  <LineWave
+                    visible={true}
+                    height="40"
+                    width="40"
+                    color="#fff"
+                    ariaLabel="line-wave-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    firstLineColor=""
+                    middleLineColor=""
+                    lastLineColor=""
+                  />
+                )}
+              </button>
           </div>
         </form>
         <div className="flex items-center justify-center">

@@ -18,6 +18,9 @@ import Search from './components/Search';
 import CreateCampaign from './components/CreateCampaign.tsx/CreateCampaign';
 import Feed from './components/Feeds/Feed';
 import Analytics from './components/Feeds/Analytics';
+import Sidebar from './components/Sidebar';
+import UserProfile from './components/UserProfie';
+
 
 function App() {
   return (
@@ -27,10 +30,11 @@ function App() {
      <Router>
      <ToastContainer />
      <Routes>
-  
+     <Route path='/Sidebar' element={<Sidebar />} />
         <Route path='/' element={<Home />} />
         <Route path='Feed' element={<Feed />} />
         <Route path='/SingleCampaign' element={<SingleCampaign />} />
+        <Route path='/UserProfile' element={<UserProfile />} />
         <Route path='/Analytics' element={<Analytics />} />
         <Route path='/CreateCampaign' element={<CreateCampaign />} />
         <Route path='/Notifications' element={<Notifications />} />

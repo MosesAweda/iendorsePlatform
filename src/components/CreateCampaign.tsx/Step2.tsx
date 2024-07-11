@@ -53,24 +53,8 @@ const Step2 = ({ prevStep, handleChange, formData }:any)  => {
           />
                  
         </div>
-
-    
-
-         
- 
-      
        
-     
-       
-        
-        <button
-          onClick={prevStep}
-          className="w-full  text-white bg-gray-500 hover:bg-blue-900 focus:ring-4 focus:outline-none
-          focus:ring-blue-300 font-medium rounded-lg  px-5 py-2.5 text-center 
-          "
-        > 
-       Previous
-        </button>
+        <div onClick={prevStep} className='text-gray-700 py-1 cursor-pointer my-3'> Back </div>
 
         <button
           onClick={handleSubmit}

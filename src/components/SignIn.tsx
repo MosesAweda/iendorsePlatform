@@ -5,6 +5,7 @@ import instagram from './svg/instagram.svg';
 import { baseURL } from './URL';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
+import { Audio, LineWave } from 'react-loader-spinner';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -15,9 +16,7 @@ const SignIn: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     const apiUrl = `${baseURL}/Auth/LoginForUser`;
-    
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -30,9 +29,13 @@ const SignIn: React.FC = () => {
       const data = await response.json();
 
       if (response.ok && data.succeeded) {
-        window.localStorage.setItem("token", data.data.jwtToken);
+
+        window.localStorage.setItem("userData", JSON.stringify(data.data));
+        window.localStorage.setItem("token", (data?.data.jwtToken));
+         
+
         navigate('/');
-        toast.success('Signed in successfully');
+        toast.success('Welcome' + ' ' + data.data.fullName + '!');
       } else {
         toast.error(data.message || 'An error occurred while signing in');
       }
@@ -43,6 +46,7 @@ const SignIn: React.FC = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <>
@@ -88,12 +92,22 @@ const SignIn: React.FC = () => {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="bg-customBlue text-white p-2.5 rounded-md w-full"
-                disabled={loading}
-              >
-                {loading ? 'Signing In...' : 'Sign In'}
+            <button disabled={loading} type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
+                <span> Sign In</span>
+                {loading && (
+                  <LineWave
+                    visible={true}
+                    height="40"
+                    width="40"
+                    color="#fff"
+                    ariaLabel="line-wave-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    firstLineColor=""
+                    middleLineColor=""
+                    lastLineColor=""
+                  />
+                )}
               </button>
             </div>
           </form>
@@ -115,6 +129,6 @@ const SignIn: React.FC = () => {
     </>
   );
 };
-//qwert12345
-//fofif40955@exeneli.com
+//12345abcde
+//devano5256@furnato.com
 export default SignIn;

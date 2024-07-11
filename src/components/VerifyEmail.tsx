@@ -1,19 +1,43 @@
-import React, { useState, useRef, ChangeEvent, KeyboardEvent, FormEvent } from 'react';
+import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent, FormEvent } from 'react';
 import logo from './svg/logo.svg';
 import facebook from './svg/facebook.svg';
 import instagram from './svg/instagram.svg';
 import { baseURL } from './URL';
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Audio, LineWave } from 'react-loader-spinner';
 
 const VerifyEmail: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const [resendClicked, setResendClicked] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const [timer, setTimer] = useState<number>(60);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
+  const email = window.localStorage.getItem("email");
+
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (resendClicked) {
+      interval = setInterval(() => {
+        setTimer(prevTimer => {
+          if (prevTimer <= 1) {
+            clearInterval(interval!);
+            setResendClicked(false);
+            return 60;
+          }
+          return prevTimer - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [resendClicked]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
@@ -71,11 +95,38 @@ const VerifyEmail: React.FC = () => {
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
+    setOtp(['', '', '', '', '', '']);
     setResendClicked(true);
-    console.log('Resend OTP');
-    // Add your resend OTP logic here
+    setLoading(true);
+    const resendUrl = `${baseURL}/Account/SendToken`;
+  
+    try {
+      const response = await fetch(resendUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          emailAddress: email,
+        }),
+      });
+  
+      const data = await response.json();
+      
+      if (response.ok && data.succeeded) {
+        toast.success('OTP resent successfully');
+      } else {
+        toast.error(data.message || 'An error occurred while resending OTP');
+      }
+    } catch (error) {
+      console.error('Error resending OTP:', error);
+      toast.error('An error occurred while resending OTP');
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   return (
     <>
@@ -96,7 +147,7 @@ const VerifyEmail: React.FC = () => {
             <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900 my-1">
               Please enter the OTP sent to your email address.
             </div>
-            <form className="space-y-20 md:space-y-20" onSubmit={handleSubmit}>
+            <form className="space-y-10 md:space-y-10" onSubmit={handleSubmit}>
               <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                 {otp.map((digit, index) => (
                   <div key={index} className="w-12 h-12">
@@ -113,16 +164,17 @@ const VerifyEmail: React.FC = () => {
                 ))}
               </div>
 
-              <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900 my-1">
-                Did not receive code?{' '}
-                <button
-                  type="button"
-                  className="text-blue-700 underline"
-                  onClick={handleResend}
-                >
-                  Resend
-                </button>
-              </div>
+              <div className={`flex justify-center text-sm leading-tight tracking-tight text-gray-900 my-1 `}>
+              Did not receive code? 
+              <button
+                type="button"
+                className={`font-bold mx-1 ${resendClicked ? 'cursor-not-allowed text-gray-500' : 'cursor-pointer text-customBlue '}`}
+                onClick={handleResend}
+                disabled={resendClicked}
+              >
+                  Resend {resendClicked && `(${timer})`}
+              </button>
+            </div>
 
               <div className='mb-20'>
                 <button disabled={loading} type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
@@ -146,7 +198,7 @@ const VerifyEmail: React.FC = () => {
             </form>
 
             <div className="flex justify-center text-sm leading-tight tracking-tight text-gray-900">
-              You already have an account? Sign In.
+              You already have an account?   <Link to={'/../SignIn'} >Sign In </Link>  
             </div>
           </div>
         </div>
