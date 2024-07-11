@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
 import Step1 from './Step1';
@@ -23,6 +23,10 @@ const CreateCamaign = () => {
     setFormData({ ...formData, [input]: e.target.value });
     console.log(formData)
   };
+
+  useEffect(() => {
+    console.log("FORMData>>>>>>>>>>>>>",formData);
+  }, [formData]);
 
   const renderStep = (currentStep:any, formData:any, handleChange:any, nextStep:any, prevStep:any) => {
     switch (currentStep) {

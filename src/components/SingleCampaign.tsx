@@ -196,7 +196,7 @@ const SingleCampaign = () => {
 
 
             
-      {/* Endorse Campain*/}
+      {/* Report   Campain*/}
       <div className={`fixed inset-0 transition-opacity ${reportMenu ? 'flex' : 'hidden'} items-center justify-center `}>
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
       <span

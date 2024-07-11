@@ -23,7 +23,7 @@ const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   const userData:any = window.localStorage.getItem("userData");
-  const token = userData ? JSON.parse(userData).jwtToken : null;
+  const token = window.localStorage.getItem("token");
   const userName = userData ? JSON.parse(userData).fullName : null;
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -82,9 +82,8 @@ const Navbar = () => {
           <img src="images/logo.png" className="h-12 md:ml-10" alt="Logo" />
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        {isAuthenticated ? (
-   <div ref={dropdownRef} className="relative inline-block text-left">
-    <div>
+          <div className=" relative" >
+        <div ref={dropdownRef} className=" inline-block text-left">
       <button
         type="button"
         className="inline-flex justify-center w-full rounded-md   px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50  "
@@ -101,7 +100,7 @@ const Navbar = () => {
     </div>
 
     {dropdownOpen && (
-      <div className="origin-top-right absolute right-0 mt-2 w-42 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+      <div ref={dropdownRef}  className="origin-top-right absolute right-0  w-42 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
         <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
           <button
             type="button"
@@ -114,17 +113,7 @@ const Navbar = () => {
         </div>
       </div>
     )}
-  </div>
-) : (
-  <a href="/SignIn">
-    <button
-      type="button"
-      className="sm:mr-20 text-xs text-white bg-customBlue hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-    >
-      Sign in
-    </button>
-  </a>
-)}
+    </div>
           <button
             onClick={toggleMenu}
             data-collapse-toggle="navbar-sticky"
@@ -181,8 +170,8 @@ const Navbar = () => {
            
         { isAuthenticated ? (
 
-<>
-<li>
+            <>
+            <li>
               <a
                 href="/CreateCampaign"
                 className="block py-2 px-3 text-xs rounded md:bg-transparent md:p-0"

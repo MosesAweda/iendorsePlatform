@@ -1,9 +1,31 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import upload from '../svg/upload.svg'
-
+import useFetch from '../Hooks/useFetch';
+import { baseURL } from '../URL';
+import close from "../svg/close.svg";
 
 const Step1 = ({ nextStep, handleChange, formData }:any)  => {
+  const [peopleModal, setPeopleModal] = useState(false);
+
+  const closePeopleModal = () => {
+    setPeopleModal(false);
+  };
+  const openReportMenu = () => {
+    setPeopleModal(true);
+  };
+ 
+
+const onSuccess = () => {
+  // console.log("success");
+};
+const onError = () => {
+  // console.log("error");
+};
+const requestURL = `${baseURL}/Category/GetCategories/`;
+const { data: categories, refreshApi: refreshCategories, error: categoriestError, loading: categoriesLoading } = useFetch(requestURL, "GET", onSuccess, onError);
+console.log("categories", categories);
+
     return (
         <> 
             <div className="flex bg-gray-100 justify-center text-xs ">
@@ -22,7 +44,10 @@ const Step1 = ({ nextStep, handleChange, formData }:any)  => {
                 className="border border-gray-300 text-gray-700  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
                  <option selected disabled> Campaign Category</option>
-              <option> Option 2</option>
+                 {categories?.map((item:any) => (
+                   <option key={item.id} value={item.id}>{item.categoryName}</option>
+                 ))}
+            
 
             </select>
         </div>
@@ -63,20 +88,16 @@ const Step1 = ({ nextStep, handleChange, formData }:any)  => {
 
 
         <div>
-          <select  
+          <input  
+                onClick={openReportMenu}
                 name="People"
+                readOnly
                 onChange={handleChange('People')} value={formData.People}
                 className=" border border-gray-300 text-gray-700 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            >
-                 <option selected disabled> Tag People</option>
-              <option> Option 2</option>
-
-            </select>
+                placeholder="Tag People"
+            />
         </div>
-      
-       
-     
-       
+ 
         <button
          
           className="w-full  text-white bg-customBlue hover:bg-blue-600  focus:ring-1 focus:outline-none
@@ -85,15 +106,7 @@ const Step1 = ({ nextStep, handleChange, formData }:any)  => {
         >  <img src={upload} alt="uplaod" className='inline-block mr-2'/>
        Uplaod Campaign Media
         </button>
-
         <p className='text-gray-700 text-xs pb-8'> You can upload a maxixum of 5 media files</p>
-
-
-
-
-
-
-
         <button
             onClick={nextStep}
           className="w-full  text-white bg-gray-400 hover:bg-blue-900 focus:ring-4 focus:outline-none
@@ -106,6 +119,68 @@ const Step1 = ({ nextStep, handleChange, formData }:any)  => {
       </form>
              </div>
             </div>
+
+                    {/* People Modal   */}
+      <div className={`fixed inset-0 transition-opacity ${peopleModal ? 'flex' : 'hidden'} items-center justify-center `}>
+      <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
+      <span
+              className="absolute top-5   z-50  bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
+              onClick={closePeopleModal}
+            >
+             <img    src={close} alt="x"  width={40} height={40}/>
+            </span>
+      <div className="relative p-4 w-full max-w-md max-h-full">
+  {/* Modal content */}
+  <div className="relative bg-white rounded-lg shadow">
+    
+      {/* Report Campaign */}
+    <div className="p-4 md:p-5">
+      <h1 className="font-medium text-center py-4"> Endorse Campaign</h1>
+      <form className="space-y-8" action="#">
+        <div>
+
+          <input
+            type="number"
+            name="email"
+            id="email"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Number of Units"
+           
+          />
+        </div>
+
+
+        <div className="mb-10">  
+      <textarea
+         
+        name="email"
+        id="email"
+        rows={6}
+        className=" resize-none mb-12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        placeholder="Leave an Endorse note"
+       
+      />
+    </div>
+       
+        <button
+          type="submit"
+          className="w-full text-white bg-customBlue hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+          "
+        >
+       Proceed
+        </button>
+   
+      </form>
+    </div>
+  </div>
+</div>
+
+            
+      </div>
+
+ 
+
+
         </>
     );
 };

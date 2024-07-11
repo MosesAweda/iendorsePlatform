@@ -9,7 +9,7 @@ import trash from '../svg/trash.svg';
 import edit from '../svg/edit.svg';
 import chart from '../svg/chart.svg'
 
-const Campaign2 = (data: any) => {
+const Campaign2 = ({item}: any) => {
   const [CampaignMenu, setCampaignMenu] = useState(false);
 
   const openCampaignMenu = () => {
@@ -18,7 +18,7 @@ const Campaign2 = (data: any) => {
   const closeCampaignMenu= () => {
     setCampaignMenu(false);
   };
-
+ 
  
 
   return (
@@ -31,7 +31,7 @@ const Campaign2 = (data: any) => {
       
         <div className="flex items-center justify-between" >
             <div>
-              <button className="bg-green-100 text-green-600 rounded-lg px-4 py-2 text-xs font-medium" >200 Points Left</button>
+              <button className="bg-green-100 text-green-600 rounded-lg px-4 py-2 text-xs font-medium" > Points Left</button>
               </div>
 
           <div onClick={openCampaignMenu}> <img  src={threeDots} /></div>
@@ -44,7 +44,8 @@ const Campaign2 = (data: any) => {
 
       <div className='my-4'>
         <h1 className='font-medium'>
-        Campaing title
+       {item?.campaignTitle}  
+
         </h1>
 
         <p className='text-customBlue font-medium  my-3'>
@@ -54,9 +55,7 @@ const Campaign2 = (data: any) => {
 
 
         <p>
-        Join the movement for a brighter tomorrow with Jon Dee! As your senator,
-        Jon is Join the movement for a brighter tomorrow with Jon Dee! As your
-        senator, Jon
+       {item?.description}
          </p>
 
          <p className="text-xs my-4 "> 11, July, 2023</p>
