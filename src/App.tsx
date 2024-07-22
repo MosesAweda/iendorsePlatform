@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Notifications from './components/Notifications';
 import Search from './components/Search';
 import CreateCampaign from './components/CreateCampaign.tsx/CreateCampaign';
-import Feed from './components/Feeds/Feed';
+import Feed from './components/Feeds/Feeds';
 import Analytics from './components/Feeds/Analytics';
 import Sidebar from './components/Sidebar';
 import UserProfile from './components/UserProfie';

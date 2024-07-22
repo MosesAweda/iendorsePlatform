@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../Navbar';
+import Navbar from '../NavBar/Navbar';
 import Step1 from './Step1';
 import Step2 from './Step2'
 

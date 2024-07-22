@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbar from './NavBar/Navbar';
 import dot from './svg/dot.svg';
 import send from './svg/send.svg';
 import bell from './svg/bell.svg'

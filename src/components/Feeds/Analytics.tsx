@@ -2,8 +2,8 @@ import { useState } from 'react';
 import bg from '../../public/images/bg.svg';
 import share from '../svg/share.svg';
 import endorse from '../svg/endorse.svg';
-import Navbar from '../Navbar';
-import Campaigns2 from './Campaign2';
+import Navbar from '../NavBar/Navbar';
+import Campaigns2 from './Campaign';
 import { Link } from 'react-router-dom';
 import edit from '../svg/edit.svg'
  

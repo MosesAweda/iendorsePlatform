@@ -12,7 +12,7 @@ const Campaigns = () => {
   return (
     <>
      
-        <div className="p-4 max-w-md border-gray-700 bg-white rounded-lg my-5">
+        <div className="p-4  max-w-lg border-gray-700 bg-white rounded-lg my-5 mx-1 ">
           <Link to={"/singlecampaign"}> 
           <div>
             <div className="flex items-center">

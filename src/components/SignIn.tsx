@@ -35,7 +35,7 @@ const SignIn: React.FC = () => {
          
 
         navigate('/');
-        toast.success('Welcome' + ' ' + data.data.fullName + '!');
+        toast('Welcome' + ' ' + data.data.fullName + '!');
       } else {
         toast.error(data.message || 'An error occurred while signing in');
       }
@@ -93,7 +93,7 @@ const SignIn: React.FC = () => {
 
             <div>
             <button disabled={loading} type="submit" className="bg-customBlue text-white p-2.5 rounded-md w-full flex items-center justify-center space-x-2">
-                <span> Sign In</span>
+                <span>{ loading?  "Signing In" : "Sign In"} </span>
                 {loading && (
                   <LineWave
                     visible={true}
@@ -129,6 +129,6 @@ const SignIn: React.FC = () => {
     </>
   );
 };
-//12345abcde
-//devano5256@furnato.com
+//  12345abcde
+//  devano5256@furnato.com
 export default SignIn;

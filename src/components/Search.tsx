@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbar from './NavBar/Navbar';
 import dot from './svg/dot.svg';
 import send from './svg/send.svg';
 import bell from './svg/bell.svg'
@@ -66,7 +66,7 @@ const Search = () => {
 
 
 {isCampaigns && (
-    <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mx-32">
+    <div className=" grid  mx-2 grid-cols-2 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 sm:mx-32">
     <div className="grid gap-4">
       <div>
         <img
@@ -173,7 +173,7 @@ const Search = () => {
 
 {!isCampaigns && (
     <div className='flex justify-center '>
-    <div className='bg-white p-10 w-1/2 rounded-md mb-10 '>
+    <div className='bg-white p-10 w-full mx-1  sm:w-3/4 rounded-md mb-10 '>
     
     <div className="flex items-center justify-between my-8 mx-1">
                 <div className="flex ">

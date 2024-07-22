@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./NavBar/Navbar";
 import share from './svg/share.svg';
 import endorse from './svg/endorse.svg';
 import link from './svg/link.svg';
@@ -50,7 +50,7 @@ const SingleCampaign = () => {
       <Navbar />
 
       <div className="flex flex-col bg-gray-100 justify-center items-center">
-        <div className="p-4 max-w-md border-gray-700 bg-white rounded-lg my-5 mx-3">
+        <div className="p-4 max-w-lg border-gray-700 bg-white rounded-lg my-5 mx-1">
           <div className="my-4">
             <img src="/images/photo.png" alt="Campaign" />
           </div>
@@ -99,17 +99,23 @@ const SingleCampaign = () => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/*  Share Modal */}
       <div className={`fixed inset-0 transition-opacity ${sharemenuOpen ? 'flex' : 'hidden'} items-center justify-center`}>
         <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
-        <span
+        {/* <span
               className="absolute top-40   z-50  bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
               onClick={closeShareMenu}
             >
              <img    src={close} alt="x"  width={40} height={40}/>
-            </span>
+            </span> */}
         <div className="relative z-10 flex items-center justify-center min-h-screen">
-          <div className="relative bg-white rounded-lg shadow-xl sm:w-full sm:max-w-sm">
+        <span
+              className="absolute mb-56   z-50  bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
+              onClick={closeShareMenu}
+            >
+             <img    src={close} alt="x"  width={40} height={40}/>
+            </span>
+          <div className="relative bg-white rounded-lg shadow-xl max-w-lg mx-1 ">
             
             <h1 className="my-7 font-bold text-center">Share Campaign</h1>
             <div className="flex justify-center my-5">
@@ -133,8 +139,6 @@ const SingleCampaign = () => {
         </div>
       </div>
 
-
-      
       {/* Endorese Campaign 2*/}
       <div className={`fixed inset-0 transition-opacity ${endorseMenu ? 'flex' : 'hidden'} items-center justify-center `}>
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
@@ -144,8 +148,9 @@ const SingleCampaign = () => {
             >
              <img    src={close} alt="x"  width={40} height={40}/>
             </span>
-      <div className="relative p-4 w-full max-w-md max-h-full">
+      <div className="relative p-4 w-full max-w-lg mx-1 max-h-full">
   {/* Modal content */}
+  
   <div className="relative bg-white rounded-lg shadow">
     
       {/* Modal body */}
@@ -193,68 +198,9 @@ const SingleCampaign = () => {
             
       </div>
 
-
-
-            
-      {/* Report   Campain*/}
-      <div className={`fixed inset-0 transition-opacity ${reportMenu ? 'flex' : 'hidden'} items-center justify-center `}>
-      <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
-      <span
-              className="absolute top-5   z-50  bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
-              onClick={closeEndorseMenu}
-            >
-             <img    src={close} alt="x"  width={40} height={40}/>
-            </span>
-      <div className="relative p-4 w-full max-w-md max-h-full">
-  {/* Modal content */}
-  <div className="relative bg-white rounded-lg shadow">
-    
-      {/* Report Campaign */}
-    <div className="p-4 md:p-5">
-      <h1 className="font-medium text-center py-4"> Endorse Campaign</h1>
-      <form className="space-y-8" action="#">
-        <div>
-
-          <input
-            type="number"
-            name="email"
-            id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Number of Units"
-           
-          />
-        </div>
-
-
-        <div className="mb-10">  
-      <textarea
-         
-        name="email"
-        id="email"
-        rows={6}
-        className=" resize-none mb-12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        placeholder="Leave an Endorse note"
-       
-      />
-    </div>
-       
-        <button
-          type="submit"
-          className="w-full text-white bg-customBlue hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
-          "
-        >
-       Proceed
-        </button>
    
-      </form>
-    </div>
-  </div>
-</div>
 
-            
-      </div>
-
-
+    { /* Report   */} 
       <div className={`fixed inset-0 transition-opacity ${reportMenu ? 'flex' : 'hidden'} items-center justify-center `}>
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
       <span
@@ -264,9 +210,7 @@ const SingleCampaign = () => {
              <img    src={close} alt="x"  width={40} height={40}/>
             </span>
 
-
-
-      <div className="relative p-4 w-full max-w-md max-h-full">
+      <div className="relative p-4 w-full max-w-lg mx-1  max-h-full">
   {/* Modal content */}
   <div className="relative bg-white rounded-lg shadow">
     

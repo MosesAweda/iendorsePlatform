@@ -133,44 +133,13 @@ console.log("categories", categories);
   {/* Modal content */}
   <div className="relative bg-white rounded-lg shadow">
     
-      {/* Report Campaign */}
+      {/* Tag People */}
     <div className="p-4 md:p-5">
-      <h1 className="font-medium text-center py-4"> Endorse Campaign</h1>
-      <form className="space-y-8" action="#">
-        <div>
-
-          <input
-            type="number"
-            name="email"
-            id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="Number of Units"
-           
-          />
-        </div>
-
-
-        <div className="mb-10">  
-      <textarea
-         
-        name="email"
-        id="email"
-        rows={6}
-        className=" resize-none mb-12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        placeholder="Leave an Endorse note"
-       
-      />
-    </div>
-       
-        <button
-          type="submit"
-          className="w-full text-white bg-customBlue hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
-          "
-        >
-       Proceed
-        </button>
-   
-      </form>
+      <h1 className="font-medium text-center py-4">Tag People</h1>
+      <div className="flex justify-center items-center">
+        <div className='p-20 m-5' > ......</div>
+      </div>
+      
     </div>
   </div>
 </div>

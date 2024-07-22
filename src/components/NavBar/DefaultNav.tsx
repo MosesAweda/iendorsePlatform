@@ -1,73 +1,50 @@
-import React, { useState, useEffect , useRef} from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import bg from '../../public/images/bg.svg';
-import bell from './svg/bell.svg';
-import home from './svg/home.svg';
-import search from './svg/search.svg';
-import plus from './svg/plus.svg';
-import feed from './svg/feed.svg';
-import account from './svg/account.svg';
-import close from './svg/close.svg'
-import editPen from './svg/editPen.svg'
-import profile from './svg/profile.svg';
-import money from './svg/money.svg'
-import deleteAccount from './svg/deleteAccount.svg';
-import wallet from './svg/wallet.svg';
-import battery from './svg/battery.svg';
-import support from './svg/support.svg';
+import bell from '../svg/bell.svg';
+import home from '../svg/home.svg';
+import search from '../svg/search.svg';
+import plus from '../svg/plus.svg';
+import feed from '../svg/feed.svg';
+import account from '../svg/account.svg';
+import close from '../svg/close.svg'
+import editPen from '../svg/editPen.svg'
+import profile from '../svg/profile.svg';
+import money from '../svg/money.svg'
+import deleteAccount from '../svg/deleteAccount.svg';
+import wallet from '../svg/wallet.svg';
+import battery from '../svg/battery.svg';
+import support from '../svg/support.svg';
 
-const GuestNavbar = () => {
+
+const DefaultNav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
-  const userData:any = window.localStorage.getItem("userData");
-  const token = userData ? JSON.parse(userData).jwtToken : null;
-  const userName = userData ? JSON.parse(userData).fullName : null;
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
+ 
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
- 
- 
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node))  {
-        setDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
-    <>
-    
+
     <nav className="bg-white w-full z-20 top-0 start-0 border-b border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="images/logo.png" className="h-12 md:ml-10" alt="Logo" />
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      
-  <a href="/SignIn">
-    <button
-      type="button"
-      className="sm:mr-20 text-xs text-white bg-customBlue hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-    >
-      Sign in
-    </button>
-  </a>
-       <button
+
+
+
+          <button
             onClick={toggleMenu}
             data-collapse-toggle="navbar-sticky"
             type="button"
@@ -111,7 +88,7 @@ const GuestNavbar = () => {
             </li>
             <li>
               <a
-                href="Search"
+                href="/Search"
                 className="block py-2 px-3 text-xs rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
@@ -122,7 +99,7 @@ const GuestNavbar = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/CreateCampaign"
                 className="block py-2 px-3 text-xs rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
@@ -133,7 +110,7 @@ const GuestNavbar = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/Feed"
                 className="block py-2 px-3 text-xs rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
@@ -142,9 +119,9 @@ const GuestNavbar = () => {
                 </span>
               </a>
             </li>
-            <li> 
+            <li>
               <a
-              
+                onClick={toggleSidebar}
                 href="#"
                 className="block py-2 px-3 text-xs rounded md:bg-transparent md:p-0"
                 aria-current="page"
@@ -156,7 +133,7 @@ const GuestNavbar = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/Notifications"
                 className="block py-2 px-3 text-xs rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
@@ -170,10 +147,9 @@ const GuestNavbar = () => {
       </div>
     </nav>
 
-
- 
-    </>
-  );
+  )
 }
 
-export default GuestNavbar;
+export default DefaultNav
+
+

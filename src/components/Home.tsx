@@ -8,10 +8,12 @@ import feed from './svg/feed.svg';
 import account from './svg/account.svg';
 import share from './svg/share.svg';
 import endorse from './svg/endorse.svg';
-import Navbar from './Navbar';
-import GuestNavbar from './GuestNavBar';
+import Navbar from './NavBar/Navbar';
+import GuestNavbar from './NavBar/GuestNavBar';
 import Campaigns from './Campaigns';
 import { Link } from 'react-router-dom';
+import apple from './svg/apple.svg';
+import playstore from './svg/playstore.svg'
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,8 +36,8 @@ const Home = () => {
         }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 h-full gap-4 p-4">
-          <div className="flex justify-center items-center p-4">
-            <div className="mx-5 max-w-md">
+          <div className="flex justify-center items-center p-2  ">
+            <div className="mx-3 max-w-md  [">
               <div style={{ fontFamily: "Georgia" }} className="text-4xl font-bold mb-4">
                 Discover, Endorse, Transform
               </div>
@@ -45,11 +47,51 @@ const Home = () => {
                 With iEndorse, you have the power to endorse causes close to your heart, amplifying their reach and influence.
                 Every endorsement is a vote for change, a commitment to shaping a better tomorrow for all.
               </p>
+              
+              <div className='flex '>
+                <div className='mr-4'>
               <Link to={'/'}>
-                <button className='p-3 bg-customBlue text-white rounded-md px-14 mt-8'>
-                  Create Campaign
+              <button className='p-1 bg-customBlue text-white rounded-lg px-5 mt-8'>
+                  <div className='flex  '>
+                    <div className=' flex items-center mr-1'> <img  width={20} height={20}  src={apple} />
+                    </div>
+                    <div className=''>
+                      <div  style={{fontSize:"10px", marginBottom:"-4px" }}  className='text-gray-50 text-xs' >
+                        Download on the 
+                      </div>
+                      <div   style={{ fontSize: "16  px " }}   className=' flex'>
+                       App Store
+                      </div>
+                    </div>
+
+                  </div>
+              
                 </button>
               </Link>
+              </div>
+              <div> 
+              <Link to={'/'}>
+              <button className='p-1 bg-customBlue text-white rounded-lg px-5 mt-8'>
+                  <div className='flex  '>
+                    <div className=' flex items-center mr-2'> <img  width={20} height={20}  src={playstore} />
+                    </div>
+                    <div className=''>
+                      <div  style={{fontSize:"10px", marginBottom:"-4px" }}  className='flex justify-start  text-gray-50 text-xs' >
+                      Get it on
+                      </div>
+                      <div   style={{ fontSize: "16  px " }}   className=' flex'>
+                      Google Play
+                      </div>
+                    </div>
+
+                  </div>
+              
+                </button>
+
+              </Link>
+              </div>
+
+              </div>
             </div>
           </div>
         </div>
