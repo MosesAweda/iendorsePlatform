@@ -47,12 +47,12 @@ const Navbar = () => {
     setIsLoading(false);  // Simulating the end of loading
   }, [token]);
 
-  useEffect(() => {
-    if(!token){
-      navigate("/SignIn");
-      toast("Sign In first!")
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(!token){
+  //     navigate("/SignIn");
+  //     toast("Sign In first!")
+  //   }
+  // }, [])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
