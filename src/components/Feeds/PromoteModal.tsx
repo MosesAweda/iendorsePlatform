@@ -17,9 +17,7 @@ const PromoteModal: React.FC<PromoteModalProps> = ({ isOpen, onClose,onSubmit })
       }
       setPromotionType(type);
     };
-useEffect(() => {
-  console.log("promotionType", promotionType);
-}, [promotionType]);
+
   if (!isOpen) return null;
 
   return (

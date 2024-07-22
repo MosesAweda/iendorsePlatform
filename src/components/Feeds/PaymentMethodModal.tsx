@@ -33,12 +33,7 @@ const PaymentMethodModal: React.FC<PaymentMethodProps> = ({ isOpen, onClose,onSu
       setPaymentMethod(type);
     };
 
-  
-    
-useEffect(() => {
-  console.log("paymentMethod", paymentMethod);
-}, [paymentMethod]);
-
+ 
   if (!isOpen) return null;
 
   return (

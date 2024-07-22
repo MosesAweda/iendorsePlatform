@@ -10,6 +10,17 @@ import PaymentMethodModal from "./PaymentMethodModal";
 import useFetch from "../Hooks/useFetch";
 import { baseURL } from "../URL";
 import InsufficientWalletBalanceModal from "./InsufficientWalletBallance";
+import SummaryModal from "./SummaryModal";
+import usePost from "../Hooks/usePost";
+import PromotionSuccessfulModal from "./PromotionSuccessfulModal";
+
+interface ApiResponse {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  postData: (body: any) => Promise<void>;
+}
+
 
 const FeedCampaign = ({ item }: any) => {
   const [campaignMenuOpen, setCampaignMenuOpen] = useState(false);
@@ -18,6 +29,8 @@ const FeedCampaign = ({ item }: any) => {
   const [showPurchaseUnitsModal, setPurchaseUnitsModal] = useState(false);
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const [insufficientWalletModal, setInsufficientWalletModal] = useState(false);
+  const [summaryModal, setSummaryModal] = useState(false);
+  const [promotionSuccessfulModal, setPromotionSuccessfulModal] = useState(false);
   const [promotionType, setPromotionType] = useState("");
   const [subscriptionPlan, setSubscriptionPlan] = useState("");
   const [unitsToPurchase, setUnitsToPurchase] = useState<number>(0);
@@ -38,16 +51,27 @@ const FeedCampaign = ({ item }: any) => {
   const closePaymentMethodModal = () => setPaymentMethodModal(false);
   const openInsufficientWalletModal = () => setInsufficientWalletModal(true);
   const closeInsufficientWalletModal = () => setInsufficientWalletModal(false);
+  const opensummarymodal = () => setSummaryModal(true);
+  const closeSummaryModal = () => setSummaryModal(false);
+  const openPromotionSuccessfulModal = () => setPromotionSuccessfulModal(true);
+  const closePromotionSuccessfulModal = () => {setPromotionSuccessfulModal(false); setAllData({})};
 
 
-
-
+const campaignId = item.campaignId;
 const walletURL = `${baseURL}/Wallet/WalletProfile`
   const { data: WalletData, refreshApi: refreshWalletData, error: walletError, loading: WalletDataLoading
   } = useFetch(walletURL, "GET", onSuccess, onError);
+ const walletBalance = WalletData?.walletBalance;
 
- const walletBalance = WalletData?.walletBalance
- console.log(walletBalance, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<wallet b")
+
+const endorseWithWalletURL = `${baseURL}/Campaign/EndorseCampaignWithWallet`
+
+const endorseWithWalletData = {
+  campaignId: campaignId,
+  numberOfUnits: unitsToPurchase,
+  endorsementNote: "I hereby Endorse "
+}
+ const { data:ApiFeedback, loading, error, postData} = usePost(endorseWithWalletURL);
 
 
   const handleSelectPromotionType = (type: string) => {
@@ -71,7 +95,6 @@ const walletURL = `${baseURL}/Wallet/WalletProfile`
    closeSubscriptionModal();
   }
 
-
   const submitUnitsToPurchase = (units:number) => {
     setUnitsToPurchase(units)
     setAllData({...allData, unitsToPurchase: units});
@@ -79,32 +102,61 @@ const walletURL = `${baseURL}/Wallet/WalletProfile`
     openPaymentMethodModal();
   }
 
-  
   const submitPaymentMethod = (method: any) => {
-    setAllData({...allData, paymentMethod: method});
+    setAllData({ ...allData, paymentMethod: method, walletBalance: walletBalance, campaignId: campaignId });
     setPaymentMethod(method)
-    closePaymentMethodModal(); 
-
-  if(unitsToPurchase > walletBalance){
-    setInsufficientWalletModal(true);
-    toast.error('Insufficient wallet balance');
- 
-  } else {
-    //opensummarymodal
+    let preferredPaymentMethod = method;
+    closePaymentMethodModal();
+    console.log(" Prefered PAyment method:", preferredPaymentMethod)
+    if (preferredPaymentMethod == "Wallet") {
+      if (unitsToPurchase > walletBalance) {
+        setInsufficientWalletModal(true);
+      } else {
+        console.log("opening summary modal")
+        opensummarymodal()
+      }
+    }
   }
 
-  }
+  useEffect(() => {
+    if (ApiFeedback) {
+      console.log(ApiFeedback);
+    openPromotionSuccessfulModal();
+    }
+  }, [ApiFeedback]);
+
+  useEffect(() => {
+    if (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Failed to promote. Please try again.");
+    }
+  }, [error]);
 
 
+  const PayWithWallet = async () => {
+    console.log("..........Paying with wallet");
+    try {
+      await postData(endorseWithWalletData);
+    } catch (err) {
+      console.error("Error posting data:", err);
+      toast.error("Failed to promote. Please try again.");
+      return;
+    }
+  };
 
- 
-useEffect(() => {
-  if(allData.promotionType && allData.subscriptionPlan && allData.unitsToPurchase && allData.paymentMethod){
-    toast.success('Campaign promoted successfully');
-  }
-  console.log(allData)
-}, [allData])
+  useEffect(() => {
+    if (ApiFeedback) {
+      console.log(ApiFeedback);
+      toast.success("Promoted Successfully");
+    }
+  }, [ApiFeedback]);
 
+  useEffect(() => {
+    if (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Failed to promote. Please try again.");
+    }
+  }, [error]);
   return (
     <>
       <div className="p-4 max-w-lg mx-1 border-gray-700 bg-white rounded-lg my-5">
@@ -207,6 +259,20 @@ useEffect(() => {
 <InsufficientWalletBalanceModal
         isOpen={insufficientWalletModal}
         onClose={closeInsufficientWalletModal}
+      />
+
+<SummaryModal
+        isOpen={summaryModal}
+        onClose={closeSummaryModal}
+        onSubmit={PayWithWallet}
+        details ={allData}
+      />
+
+
+<PromotionSuccessfulModal
+        isOpen={promotionSuccessfulModal}
+        onClose={closePromotionSuccessfulModal}
+        details ={allData}
       />
 
 
