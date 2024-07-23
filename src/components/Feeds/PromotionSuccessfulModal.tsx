@@ -27,23 +27,22 @@ console.log(details)
     <div className="relative p-4 w-full max-w-md max-h-full">
       <div className="relative bg-white rounded-lg shadow">
         <div className="p-2 md:p-5">
-          <h1 className="text-center font-bold">   Promotion Successful</h1>
-          <div className="flex max-w-sm  justify-center  ">
-              <img src={greenCheck} alt="insufficient" />  
+          <h1 className="text-center font-bold my-5">   Promotion Successful</h1>
+          <div className="flex  justify-center my-4 ">
+              <img src={greenCheck} alt="greenCheck"  />  
           </div>
 
-            <div className='text-xs mb-20'>
+            <div className='text-center  mb-10'>
             <p> You promoted your campaign #{details.campaignId} with {details.unitsToPurchase} units and your campaign has been published. Thank you.</p>
             </div>
-            <div className="flex mt-10 text-sm justify-between mb-3">
-          <div className="flex mr-5 items-center w-full">
+         
+          <div className="flex  items-center w-full">
           <button
               onClick={() => onClose()}
               className="w-full text-white bg-customBlue hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
              Ok
             </button>
-          </div>
         </div>
         </div>
       </div>
