@@ -39,18 +39,22 @@ const PaymentMethodModal: React.FC<PaymentMethodProps> = ({ isOpen, onClose,onSu
   return (
     <div className="fixed inset-0 transition-opacity flex items-center justify-center">
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
-      <span
-        className="absolute top-40 md:top-0 z-50 bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
+
+      <div className="relative p-4 w-full max-w-md max-h-full">
+      <div className='  flex justify-center p-4'>      
+             <span
+        className=" bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
         onClick={onClose}
       >
         <img src={close} alt="x" width={40} height={40} />
-      </span>
-      <div className="relative p-4 w-full max-w-md max-h-full">
+      </span> 
+      </div> 
+    
         <div className="relative bg-white rounded-lg shadow">
           <div className="p-4 md:p-5">
             <h1 className="text-center font-bold"> Select Payment Method</h1>
 
-            <div className="flex-col max-w-sm space-y-2 justify-center mt-8 mb-20">
+            <div className="flex-col max-w-sm space-y-2 justify-center mt-2 mb-10">
 
             <div
                 className="flex items-center ps-4 border border-gray-200 rounded-lg cursor-pointer"

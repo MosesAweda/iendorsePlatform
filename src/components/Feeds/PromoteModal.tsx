@@ -23,13 +23,18 @@ const PromoteModal: React.FC<PromoteModalProps> = ({ isOpen, onClose,onSubmit })
   return (
     <div className="fixed inset-0 transition-opacity flex items-center justify-center">
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
-      <span
-        className="absolute top-40 md:top-14 z-50 bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
+
+
+      <div className="relative p-4 w-full max-w-md max-h-full">
+    
+    <div className='  flex justify-center p-4'>      
+             <span
+        className=" bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
         onClick={onClose}
       >
         <img src={close} alt="x" width={40} height={40} />
-      </span>
-      <div className="relative p-4 w-full max-w-md max-h-full">
+      </span> 
+      </div> 
         <div className="relative bg-white rounded-lg shadow">
           <div className="p-4 md:p-5">
             <h1 className="text-center font-bold">Promote Your Campaign</h1>
@@ -72,14 +77,18 @@ const PromoteModal: React.FC<PromoteModalProps> = ({ isOpen, onClose,onSubmit })
               </div>
             </div>
             
+
+            
             <button
               onClick={() => onSubmit(promotionType)}
               className="w-full text-white bg-customBlue hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Done
             </button>
+       
           </div>
         </div>
+      
       </div>
     </div>
   );

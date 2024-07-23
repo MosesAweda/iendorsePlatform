@@ -13,6 +13,7 @@ import InsufficientWalletBalanceModal from "./InsufficientWalletBallance";
 import SummaryModal from "./SummaryModal";
 import usePost from "../Hooks/usePost";
 import PromotionSuccessfulModal from "./PromotionSuccessfulModal";
+import ShareCampaignModal from "./ShareCampaignModal"
 
 interface ApiResponse {
   data: any;
@@ -31,11 +32,11 @@ const FeedCampaign = ({ item }: any) => {
   const [insufficientWalletModal, setInsufficientWalletModal] = useState(false);
   const [summaryModal, setSummaryModal] = useState(false);
   const [promotionSuccessfulModal, setPromotionSuccessfulModal] = useState(false);
+  const [shareCampaignModal, setShareCampaignModal] = useState(false);
   const [promotionType, setPromotionType] = useState("");
   const [subscriptionPlan, setSubscriptionPlan] = useState("");
   const [unitsToPurchase, setUnitsToPurchase] = useState<number>(0);
   const [paymentMethod, setPaymentMethod] = useState("");
-  
   const [allData, setAllData] = useState<any>({});
   const onSuccess = () => {}
   const onError = () => {}
@@ -55,7 +56,8 @@ const FeedCampaign = ({ item }: any) => {
   const closeSummaryModal = () => setSummaryModal(false);
   const openPromotionSuccessfulModal = () => setPromotionSuccessfulModal(true);
   const closePromotionSuccessfulModal = () => {setPromotionSuccessfulModal(false); setAllData({})};
-
+  const openShareCampaignModal = () => setShareCampaignModal(true);
+  const closeShareCampaignModal = () =>   setShareCampaignModal(false);
 
 const campaignId = item.campaignId;
 const walletURL = `${baseURL}/Wallet/WalletProfile`
@@ -71,7 +73,7 @@ const endorseWithWalletData = {
   numberOfUnits: unitsToPurchase,
   endorsementNote: "I hereby Endorse "
 }
- const { data:ApiFeedback, loading, error, postData} = usePost(endorseWithWalletURL);
+ const { data:ApiFeedback, loading: ApiFeedbackLoading, error, postData} = usePost(endorseWithWalletURL);
 
 
   const handleSelectPromotionType = (type: string) => {
@@ -93,6 +95,7 @@ const endorseWithWalletData = {
     setSubscriptionPlan(type);  
     setAllData({...allData, subscriptionPlan: type});
    closeSubscriptionModal();
+   openPaymentMethodModal();
   }
 
   const submitUnitsToPurchase = (units:number) => {
@@ -111,6 +114,7 @@ const endorseWithWalletData = {
     if (preferredPaymentMethod == "Wallet") {
       if (unitsToPurchase > walletBalance) {
         setInsufficientWalletModal(true);
+        setAllData({});
       } else {
         console.log("opening summary modal")
         opensummarymodal()
@@ -118,19 +122,7 @@ const endorseWithWalletData = {
     }
   }
 
-  useEffect(() => {
-    if (ApiFeedback) {
-      console.log(ApiFeedback);
-    openPromotionSuccessfulModal();
-    }
-  }, [ApiFeedback]);
-
-  useEffect(() => {
-    if (error) {
-      console.error("Error fetching data:", error);
-      toast.error("Failed to promote. Please try again.");
-    }
-  }, [error]);
+ 
 
 
   const PayWithWallet = async () => {
@@ -147,7 +139,8 @@ const endorseWithWalletData = {
   useEffect(() => {
     if (ApiFeedback) {
       console.log(ApiFeedback);
-      toast.success("Promoted Successfully");
+    openPromotionSuccessfulModal();
+    closeSummaryModal()
     }
   }, [ApiFeedback]);
 
@@ -211,7 +204,7 @@ const endorseWithWalletData = {
   
         <div className="flex mt-10 text-sm justify-between mb-3">
           <div className="flex mr-5 items-center w-full">
-            <button className="p-3 bg-customBlue text-white rounded-md w-full">
+            <button onClick={openShareCampaignModal} className="p-3 bg-customBlue text-white rounded-md w-full">
               Share Campaign
             </button>
           </div>
@@ -259,6 +252,7 @@ const endorseWithWalletData = {
 <InsufficientWalletBalanceModal
         isOpen={insufficientWalletModal}
         onClose={closeInsufficientWalletModal}
+        details={allData}
       />
 
 <SummaryModal
@@ -266,12 +260,19 @@ const endorseWithWalletData = {
         onClose={closeSummaryModal}
         onSubmit={PayWithWallet}
         details ={allData}
+        ApiLoading={ApiFeedbackLoading}
       />
 
 
 <PromotionSuccessfulModal
         isOpen={promotionSuccessfulModal}
         onClose={closePromotionSuccessfulModal}
+        details ={allData}
+      />
+
+<ShareCampaignModal
+        isOpen={shareCampaignModal}
+        onClose={closeShareCampaignModal}
         details ={allData}
       />
 

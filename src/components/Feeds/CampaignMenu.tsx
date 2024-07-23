@@ -16,13 +16,16 @@ const CampaignMenu: React.FC<CampaignMenuProps> = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 transition-opacity flex items-center justify-center">
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
-      <span
-        className="absolute top-5 z-50 bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
+      <div className="relative p-4 w-full max-w-md max-h-full">
+      <div className='  flex justify-center p-4'>      
+             <span
+        className=" bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
         onClick={onClose}
       >
         <img src={close} alt="x" width={40} height={40} />
-      </span>
-      <div className="relative p-4 w-full max-w-md max-h-full">
+      </span> 
+      </div> 
+    
         <div className="bg-white rounded-lg shadow flex items-center justify-center pt-20 pb-44">
           <div className="flex-col justify-center items-center p-6 border w-28 flex-initial bg-gray-100 rounded-md m-2">
             <div className="flex justify-center">

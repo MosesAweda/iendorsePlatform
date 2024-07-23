@@ -24,48 +24,52 @@ const SubscriptionModal: React.FC<SubscriptionModal> = ({ isOpen, onClose,  onSu
   return (
     <div className="fixed inset-0 transition-opacity flex items-center justify-center">
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
-      <span
-        className="absolute top-40 md:top-1 z-50 bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
+     
+      <div className="relative p-4 w-full max-w-lg max-h-full">
+      <div className='  flex justify-center p-4'>      
+             <span
+        className=" bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
         onClick={onClose}
       >
         <img src={close} alt="x" width={40} height={40} />
-      </span>
-      <div className="relative p-4 w-full max-w-lg max-h-full">
+      </span> 
+      </div> 
+    
       <div className="relative bg-white rounded-lg shadow">
-        <div className="p-4 md:p-5">
+        <div className="p-2 md:p-3">
           <h1 className="text-center font-bold">Promote Your Campaign</h1>
-          <p className="p-1 text-sm text-center font-sans mb-4">
+          <p className="p-1 text-xs text-center font-sans mb-2">
             Subscribe to a plan that best suits you to be able to share and get a wider reach for your campaign.
           </p>
-          <div className="flex justify-center mb-2">
-            <div className="grid grid-cols-2 my-2">
+          <div className="flex justify-center mb-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 ">
               <div
-                className={`border rounded-lg mx-2 px-6 py-3 text-xs cursor-pointer ${selectedPlan === 'Basic' ? 'border-blue-500' : ''}`}
+                className={`mb-3 border rounded-lg mx-2 px-6 py-2 text-xs cursor-pointer ${selectedPlan === 'Basic' ? 'border-blue-500' : ''}`}
                 onClick={() => handleSelectPlan('Basic')}
               >
-                <img src={Heart} className='-ml-1' />
+                <img src={Heart} className='-ml-1'  width={30} height={30}/>
                 <span className='text-blue-800 font-medium text-sm'> Basic </span>
                 <p>
                   <span className="font-medium text-lg"> ₦ 20,000</span>
                   <span className="text-xs">/Month</span>
                 </p>
-                <div className='mt-2'>
+                <div className='mt-1'>
                   <p> <img src={Check} className='inline' /> Good value </p>
                   <p> <img src={Check} className='inline' /> 100 social media shares </p>
                   <p> <img src={Check} className='inline' /> Get 10 free shares</p>
                 </div>
               </div>
               <div
-                className={`border rounded-lg mx-2 px-6 py-3 text-xs cursor-pointer ${selectedPlan === 'Standard' ? 'border-blue-500' : ''}`}
+                className={`mb-3 border rounded-lg mx-2 px-6 py-2 text-xs cursor-pointer ${selectedPlan === 'Standard' ? 'border-blue-500' : ''}`}
                 onClick={() => handleSelectPlan('Standard')}
               >
-                <img src={Medal} className='-ml-1' />
+                <img src={Medal} className='-ml-1'  width={30} height={30}/>
                 <span className='text-blue-800 font-medium text-sm'> Standard </span>
                 <p>
                   <span className="font-medium text-lg"> ₦ 20,000</span>
                   <span className="text-xs">/Month</span>
                 </p>
-                <div className='mt-2'>
+                <div className='mt-1'>
                   <p> <img src={Check} className='inline' /> Good value </p>
                   <p> <img src={Check} className='inline' /> 100 social media shares </p>
                   <p> <img src={Check} className='inline' /> Get 10 free shares</p>
@@ -73,18 +77,18 @@ const SubscriptionModal: React.FC<SubscriptionModal> = ({ isOpen, onClose,  onSu
               </div>
             </div>
           </div>
-          <div className="flex justify-center mb-5">
+          <div className="flex justify-center mb-3">
             <div
-              className={`border rounded-lg mx-2 px-6 py-3 text-xs cursor-pointer ${selectedPlan === 'Premium' ? 'border-blue-500' : ''}`}
+              className={`border rounded-lg mx-2 px-6 py-1 text-xs cursor-pointer ${selectedPlan === 'Premium' ? 'border-blue-500' : ''}`}
               onClick={() => handleSelectPlan('Premium')}
             >
-              <img src={medalStar} className='' />
+              <img src={medalStar}  width={30} height={30} className='' />
               <span className='text-blue-800 font-medium text-sm'> Premium </span>
               <p>
                 <span className="font-medium text-lg"> ₦ 20,000</span>
                 <span className="text-xs">/Month</span>
               </p>
-              <div className='mt-2'>
+              <div className='mt-1'>
                 <p> <img src={Check} className='inline' /> Good value </p>
                 <p> <img src={Check} className='inline' /> 100 social media shares </p>
                 <p> <img src={Check} className='inline' /> Get 10 free shares</p>
