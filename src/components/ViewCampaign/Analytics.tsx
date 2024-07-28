@@ -3,7 +3,7 @@ import bg from '../../public/images/bg.svg';
 import share from '../svg/share.svg';
 import endorse from '../svg/endorse.svg';
 import Navbar from '../NavBar/Navbar';
-import Campaigns2 from './FeedCampaign';
+import Campaigns2 from './ViewCampaign';
 import { Link } from 'react-router-dom';
 import edit from '../svg/edit.svg'
  

@@ -114,7 +114,6 @@ const endorseWithWalletData = {
     if (preferredPaymentMethod == "Wallet") {
       if (unitsToPurchase > walletBalance) {
         setInsufficientWalletModal(true);
-        setAllData({});
       } else {
         console.log("opening summary modal")
         opensummarymodal()
@@ -139,8 +138,9 @@ const endorseWithWalletData = {
   useEffect(() => {
     if (ApiFeedback) {
       console.log(ApiFeedback);
+         closeSummaryModal()
     openPromotionSuccessfulModal();
-    closeSummaryModal()
+ 
     }
   }, [ApiFeedback]);
 

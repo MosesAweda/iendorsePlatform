@@ -10,21 +10,37 @@ import share from './svg/share.svg';
 import endorse from './svg/endorse.svg';
 import Navbar from './NavBar/Navbar';
 import GuestNavbar from './NavBar/GuestNavBar';
-import Campaigns from './Campaigns';
+import HomeCampaign from './HomeCampaign';
 import { Link } from 'react-router-dom';
 import apple from './svg/apple.svg';
 import playstore from './svg/playstore.svg'
+import usePost from './Hooks/usePost';
+import { baseURL } from './URL';
+import { ThreeCircles } from 'react-loader-spinner';
+ 
+
+interface ApiResponse {
+  data: any;
+  loading: boolean;
+  error: Error | null;
+  postData: (body: any) => Promise<void>;
+}
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  let discoverURL = `${baseURL}/Campaign/DiscoverCampaign?pageNumber=1&pageSize=100`;
+  const { data:ApiData, loading, error, postData } = usePost<ApiResponse>(discoverURL);
 
+  useEffect(() => {
+    postData({});
+  }, []);
 
   return (
     <>
     <Navbar/>
 
       <div
-        className="flex flex-col w-full h-screen"
+        className="hiddenflex flex-col w-full h-screen"
         style={{
           backgroundImage: 'url(images/hero.png)',
           backgroundRepeat: 'no-repeat',
@@ -97,6 +113,10 @@ const Home = () => {
         </div>
       </div>
 
+
+  
+
+
       <div className="flex flex-wrap justify-center p-4 text-xs bg-gray-100">
         <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>All Campaigns</button></div>
         <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Civic Engagements</button></div>
@@ -108,8 +128,28 @@ const Home = () => {
         <div><button className='bg-customBlue text-white px-5 py-2 m-2 rounded-full inline-block'>Others</button></div>
       </div>
 
+
+
+
       <div className="flex flex-col bg-gray-100 justify-center items-center">
-        <Campaigns />
+      {error && <p>Error: {error.message}</p>}
+
+      {loading && ( <div className='flex items-center justify-center h-screen'>  <ThreeCircles
+              visible={true}
+              height="40"
+              width="40"
+              color="#0D236E"
+              ariaLabel="three-circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              />
+              </div>
+              )}
+
+
+            {ApiData && ApiData?.data.map((item:any, index:any) => (
+                <HomeCampaign key={index} item={item} />
+            ) )}
       </div>
     </>
   );

@@ -10,7 +10,7 @@ import ResetPassword from './components/ResetPasssword';
 import NewPasword from './components/NewPassword';
 // import { Verify } from 'crypto';
 import VerifyEmail from './components/VerifyEmail';
-import SingleCampaign from './components/SingleCampaign';
+ import ViewCampaign from './components/ViewCampaign/ViewCampaign';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Notifications from './components/Notifications';
@@ -20,7 +20,8 @@ import Feed from './components/Feeds/Feeds';
 import Analytics from './components/Feeds/Analytics';
 import Sidebar from './components/Sidebar';
 import UserProfile from './components/UserProfie';
-
+import HomeCampaign from './components/HomeCampaign';
+import Wallet from './components/Wallet/Wallet';
 
 function App() {
   return (
@@ -33,8 +34,9 @@ function App() {
      <Route path='/Sidebar' element={<Sidebar />} />
         <Route path='/' element={<Home />} />
         <Route path='Feed' element={<Feed />} />
-        <Route path='/SingleCampaign' element={<SingleCampaign />} />
+        <Route path='/ViewCampaign/:uid' element={<ViewCampaign />} />
         <Route path='/UserProfile' element={<UserProfile />} />
+        <Route path='/Wallet' element={<Wallet />} />
         <Route path='/Analytics' element={<Analytics />} />
         <Route path='/CreateCampaign' element={<CreateCampaign />} />
         <Route path='/Notifications' element={<Notifications />} />

@@ -2,18 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import share from './svg/share.svg';
 import endorse from './svg/endorse.svg';
+ 
 
-const Campaigns = () => {
+const HomeCampaign = ({item}:any) => {
   const handleClick = (event:any) => {
     event.stopPropagation(); // Prevents the click event from propagating to the parent element
     alert('Hello');
   }
 
+console.log("camoampaign File", item?.campaignFiles[0]?.filePath)
+
   return (
     <>
-     
-        <div className="p-4  max-w-lg border-gray-700 bg-white rounded-lg my-5 mx-1 ">
-          <Link to={"/singlecampaign"}> 
+        <div className="p-4  max-w-lg border-gray-700 bg-white rounded-2xl my-5 mx-1 ">
+          <Link to={`/ViewCampaign/${item?.campaignId}`} className={""}> 
           <div>
             <div className="flex items-center">
               <div className="mr-4 bg-red-500 rounded-full mx-1">
@@ -21,28 +23,41 @@ const Campaigns = () => {
               </div>
               <div>
                 <div className="font-semibold text-lg">
-                  Poster
+                 {item?.campaignOwner}
                 </div>
                 <div className='text-xs'>
-                  <i>Title</i>
+                  <i> {item?.campaignOwnerTitle}</i>
                 </div>
               </div>
             </div>
           </div>
-          <div className='my-4'>
-            <h1 className='font-medium'>
-              Can Two Work Together Except They Agree
-            </h1>
-            Join the movement for a brighter tomorrow with Jon Dee! As your senator,
-            Jon is Join the movement for a brighter tomorrow with Jon Dee! As your
-            senator, Jon
-          </div>
+          <div className="my-4 min-w-[300px] max-w-[648px] p-4   rounded-lg">
+  <h1 className="font-medium">
+    {item?.campaignTitle}
+  </h1>
+  <p>
+    {item?.description}
+  </p>
+</div>
+
+
+
           <div>
-            <img src="/images/photo.png" alt="Campaign" />
+          <div className="my-4">
+
+{item?.campaignFiles?.length > 0 && (
+    <div className="">
+    <img className="rounded-2xl"  src={item?.campaignFiles[0]?.filePath  }   
+        />
+          </div>
+)}
+
+
+</div>
           </div>
 
           </Link>
-          <div className='flex mt-4 text-sm'>
+          <div className='flex mt-4 mb-3 text-sm'>
             <div className='flex mr-5 items-center'>
               <div>
                 <img src={share} width={20} height={20} className='mr-1' alt="Share" />
@@ -63,4 +78,4 @@ const Campaigns = () => {
   );
 }
 
-export default Campaigns;
+export default HomeCampaign  ;
