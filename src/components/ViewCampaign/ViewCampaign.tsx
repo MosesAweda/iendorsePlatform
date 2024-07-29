@@ -203,7 +203,7 @@ const endorseWithWalletData = {
           </div>
         </div>
 
-        <div className="my-4 campaign-container">
+        <div className="my-4 campaign-container min-w-[300px] max-w-[648px] ">
   <h1 className="font-medium">{campaignData?.campaignTitle}</h1>
   <p className="flex my-2 text-customBlue font-medium text-justify">
     <img src={link} alt="Link" />

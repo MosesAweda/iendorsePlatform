@@ -43,22 +43,25 @@ const PromoteModal: React.FC<PromoteModalProps> = ({ isOpen, onClose,onSubmit })
             </p>
             
             <div className="flex-col max-w-sm space-y-2 justify-center mb-20">
-              <div className="flex items-center ps-4 border border-gray-200 rounded-lg">
-                <input
-                  onChange={() => handleSelectPromotionType("PurchaseUnits")}
-                  id="bordered-radio-1"
-                  type="radio"
-                  value="PurchaseUnit"
-                  name="bordered-radio"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                />
-                <label
-                  htmlFor="bordered-radio-1"
-                  className="w-full py-4 ms-2 text-sm font-medium text-gray-900"
-                >
-                  Purchase Unit
-                </label>
-              </div>
+            <div className="flex items-center ps-4 border border-gray-200 rounded-lg">
+                    <input
+                        onChange={() => handleSelectPromotionType("PurchaseUnits")}
+                        id="bordered-radio-1"
+                        type="radio"
+                        value="PurchaseUnit"
+                        name="bordered-radio"
+                        className="w-4 h-4 text-blue-600 bg-gray-10 cursor-pointer border-gray-300 focus:ring-0 focus:outline-none"
+                      />
+                      <label
+                        htmlFor="bordered-radio-1"
+                        className="w-full py-4 ms-2 text-sm font-medium text-gray-900"
+                      >
+                        Purchase Unit
+                      </label>
+                    </div>
+
+
+
               <div className="flex items-center ps-4 border border-gray-200 rounded">
                 <input
                   onChange={() => handleSelectPromotionType("Subscription")}
@@ -66,7 +69,7 @@ const PromoteModal: React.FC<PromoteModalProps> = ({ isOpen, onClose,onSubmit })
                   value="Subscribe"
                   type="radio"
                   name="bordered-radio"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer focus:ring-blue-500 focus:ring-2"
                 />
                 <label
                   htmlFor="bordered-radio-2"

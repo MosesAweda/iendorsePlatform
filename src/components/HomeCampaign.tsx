@@ -14,7 +14,7 @@ console.log("camoampaign File", item?.campaignFiles[0]?.filePath)
 
   return (
     <>
-        <div className="p-4  max-w-lg border-gray-700 bg-white rounded-2xl my-5 mx-1 ">
+        <div className="p-4  max-w-lg border-gray-700 bg-white rounded-2xl my-5 mx-1 p-3 ">
           <Link to={`/ViewCampaign/${item?.campaignId}`} className={""}> 
           <div>
             <div className="flex items-center">
@@ -31,11 +31,11 @@ console.log("camoampaign File", item?.campaignFiles[0]?.filePath)
               </div>
             </div>
           </div>
-          <div className="my-4 min-w-[300px] max-w-[648px] p-4   rounded-lg">
+          <div className="my-4 min-w-[300px] max-w-[648px]   rounded-lg">
   <h1 className="font-medium">
     {item?.campaignTitle}
   </h1>
-  <p>
+  <p className="text-justify">
     {item?.description}
   </p>
 </div>

@@ -3,6 +3,7 @@ import close from '../svg/close.svg';
 import greenCheck from '../svg/greenCheck.svg'
 import { toast } from 'react-toastify';
 import CampaignMenu from './CampaignMenu';
+import Wallet from '../Wallet/Wallet';
 
 interface EndorsementSuccessfulModalProps  {
   isOpen: boolean;
@@ -38,7 +39,7 @@ console.log(details)
 
             <div className='text-center  mb-10'>
               
-            <p> Your endorsement was successful and your current wallet balance is 3970 points. Thank you for endorsing
+            <p> Your endorsement was successful and your current wallet balance is {details.walletBalance} points. Thank you for endorsing
                campaign #{details.campaignId} with {details.unitsToPurchase} units.
                </p>
           

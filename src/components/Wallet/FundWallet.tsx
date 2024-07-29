@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import close from '../svg/close.svg';
 import { toast } from "react-toastify";
  
 
-interface PurchaseUnitProps {
+interface FundWalletProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (units: number) => void;
 }
 
-const PurchaseUnitsModal: React.FC<PurchaseUnitProps> = ({ isOpen, onClose, onSubmit }) => {
+const FundWallet: React.FC<FundWalletProps> = ({ isOpen, onClose, onSubmit }) => {
   const [numberOfUnits, setNumberOfUnits] = useState<number>(0);
   const [error, setError] = useState<string>('');
-  const [nairaEquivalent, setNairaEquivalent] = useState<number>(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
@@ -26,27 +25,17 @@ const PurchaseUnitsModal: React.FC<PurchaseUnitProps> = ({ isOpen, onClose, onSu
   const handleSubmit = () => {
     if ((numberOfUnits <= 0) ) {
       setError('Please enter a valid number of units.'); 
-   
+      toast("Please enter a valid number of units.");
     } else {
       setError('');
       onSubmit(numberOfUnits);
     }
-
   };
-  const formatCurrency = (number:number, locale = 'en-US', currency = 'NGN') => {
-    return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(number);
-  };
-
-
-  useEffect(() => {
-    setNairaEquivalent( numberOfUnits * 1000 );
-  },[numberOfUnits])
-
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 transition-opacity flex items-center justify-center z-50">
+    <div className="fixed inset-0 transition-opacity flex items-center justify-center">
       <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
       <div className="relative p-4 w-full max-w-md max-h-full">
       <div className='  flex justify-center p-4'>      
@@ -59,9 +48,9 @@ const PurchaseUnitsModal: React.FC<PurchaseUnitProps> = ({ isOpen, onClose, onSu
       </div> 
         <div className="relative bg-white rounded-lg shadow">
           <div className="p-4 md:p-5">
-            <h1 className="text-center font-bold">Promote Your Campaign</h1>
+            <h1 className="text-center font-bold"> Fund Wallet</h1>
             <p className="p-1 text-sm text-center font-sans mb-4">
-              Purchase units from your wallet or subscribe to a plan to be able to share and get a wider reach for your campaign.
+            Fund your wallet to be able to promote your campaigns and also endorse other campaigns
             </p>
 
             <div className="flex-col max-w-sm space-y-2 justify-center mb-40 ">
@@ -69,25 +58,12 @@ const PurchaseUnitsModal: React.FC<PurchaseUnitProps> = ({ isOpen, onClose, onSu
                 <input
                   onChange={handleChange}
                   id="units"
-                  value={numberOfUnits>0 ? numberOfUnits : ''}
                   className="w-full py-2 px-3 text-sm  rounded-md  border text-gray-900"
                   placeholder="Number of units"
                 />
-                <div>   
-                  
-                  {numberOfUnits > 0 ? 
-                    <span className='bg-blue-50 text-blue-500 px-2 text-xs rounded-full py-2 mt-6' >
-                    {numberOfUnits} units equals {formatCurrency(nairaEquivalent)}   </span> 
-                      
-                  :        <span className='bg-blue-50 text-blue-500 px-2 text-xs rounded-full py-2 mt-6' >
-                1 units equals NGN 1000
-                    </span>
-                      
-                      }
-                
-                  
-
-               
+                <div>  
+                    <span className='bg-blue-50 text-blue-500 px-2 text-xs rounded-full py-2 mt-6' > 1000 naira equals 1 unit </span>
+                 
                     </div>
 
               
@@ -106,4 +82,4 @@ const PurchaseUnitsModal: React.FC<PurchaseUnitProps> = ({ isOpen, onClose, onSu
   );
 };
 
-export default PurchaseUnitsModal;
+export default FundWallet;
